@@ -21,9 +21,26 @@ sudo make install
 
 Now that we have openocd working time to wire.
 
+```
 GPIO 11 (pin 23) - SWCLK
 GPIO  8 (pin 24) - SWDIO
 GPIO 26 (pin 37) - TRST - NRST Didnt used it
 GPIO 18 (pin 12) - SRST - NRST Didnt used it
 GND - GND
+```
 
+# OpenOCD
+On raspberry execute
+
+```
+/usr/local/bin/openocd -c "bindto 0.0.0.0" -f ./interface/raspberrypi-native.cfg -c "transport select swd" -c "adapter speed 1000" -f ./target/nrf52.cfg
+```  
+
+on local machine telnet to programmer. port 4444
+
+
+# Sources and various info 
+
+When to use what sdk: https://devzone.nordicsemi.com/nordic/nordic-blog/b/blog/posts/nrf-connect-sdk-and-nrf5-sdk-statement
+
+nRF52840 documentation: https://infocenter.nordicsemi.com/index.jsp?topic=/ps_nrf52840
