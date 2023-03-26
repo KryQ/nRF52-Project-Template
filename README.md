@@ -1,6 +1,10 @@
 # Info
-Basic blinky project for NRF52840 on dongle board (PCA10059) with no mbr or bootloader. 
-NO SOFTDEVICE EITHER!
+Basic UART example working with fifo and interrupts.
+No flow control and parity check  
+pin 0,17 as RX  
+and 0,20 as TX
+
+⚠ If you arent connecting rx pull it up to vcc as otherwise you will be met with break interrupt and hange there.
 
 # How to start
 Edit `GNU_INSTALL_ROOT` `GNU_VERSION` and `arm-none-eabi` to match your current needs
@@ -11,11 +15,13 @@ As I dont plan on spending ~500$ on jlink, clones are flaky and stlink converted
 Simply boot and rpios and compile openocd on that bad boy
 
 ```
-git clone http://openocd.zylin.com/openocd
+sudo apt automake install wget git autoconf libtool make pkg-config libusb-1.0-0 libusb-1.0-0-dev libhidapi-dev libftdi-dev libhidapi-dev telnet
+git clone https://github.com/openocd-org/openocd.git
 cd openocd/
 ./bootstrap
 sudo apt install libtool #probably some deps i forgot
-./configure --enable-sysfsgpio --enable-bcm2835gpio --disable-dependency-tracking #about this dep tracking i dont really know why i needed that
+./configure --enable-sysfsgpio --enable-bcm2835gpio --enable-cmsis-dap
+make -j4
 sudo make install
 ```
 
@@ -38,9 +44,11 @@ On raspberry execute
 
 on local machine telnet to programmer. port 4444
 
+# Things to be mindful of
+Sometimes you include source in makefile and it doesnt compile :/ 
+Why? NRF added safeguard to prevent excessive flash usage when you import whole lib folder just add `{MODULE}_ENABLED` explained in `nordic_common.h`
 
 # Sources and various info 
 
-When to use what sdk: https://devzone.nordicsemi.com/nordic/nordic-blog/b/blog/posts/nrf-connect-sdk-and-nrf5-sdk-statement
-
+When to use what sdk: https://devzone.nordicsemi.com/nordic/nordic-blog/b/blog/posts/nrf-connect-sdk-and-nrf5-sdk-statement  
 nRF52840 documentation: https://infocenter.nordicsemi.com/index.jsp?topic=/ps_nrf52840

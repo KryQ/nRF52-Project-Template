@@ -1,6 +1,7 @@
 # User
 nRF5_SDK
 build
+.DS_Store
 
 # Prerequisites
 *.d

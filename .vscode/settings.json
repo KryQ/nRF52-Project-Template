@@ -7,6 +7,15 @@
     "nrf_uart.h": "c",
     "app_error.h": "c",
     "app_uart.h": "c",
-    "nrf_uarte.h": "c"
-  }
+    "nrf_uarte.h": "c",
+    "nrf_delay.h": "c",
+    "nrf.h": "c",
+    "nrf52840.h": "c",
+    "nrf52_to_nrf52840.h": "c",
+    "nrf_drv_uart.h": "c",
+    "sdk_common.h": "c",
+    "sdk_os.h": "c",
+    "compiler_abstraction.h": "c"
+  },
+  "cortex-debug.liveWatchRefreshRate": 1000
 }
