@@ -44,6 +44,14 @@ On raspberry execute
 
 on local machine telnet to programmer. port 4444
 
+# Serial over IP
+```
+sudo apt install socat
+sudo socat file:/dev/ttyAMA0,raw,echo=0,b115200 tcp-l:3016
+```
+
+On local machine in vs code install `Serial Monitor (ms-vscode.vscode-serial-monitor)` and add your serial monitor IP
+
 # Things to be mindful of
 Sometimes you include source in makefile and it doesnt compile :/ 
 Why? NRF added safeguard to prevent excessive flash usage when you import whole lib folder just add `{MODULE}_ENABLED` explained in `nordic_common.h`
