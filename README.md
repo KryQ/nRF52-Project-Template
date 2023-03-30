@@ -1,8 +1,7 @@
 # Info
-Basic UART example working with fifo and interrupts.
-No flow control and parity check  
-pin 0,17 as RX  
-and 0,20 as TX
+Basic TWI/I2C example. It's written in polling mode.
+pin 0,13 as SCL  
+and 0,15 as SDA
 
 ⚠ If you arent connecting rx pull it up to vcc as otherwise you will be met with break interrupt and hange there.
 
