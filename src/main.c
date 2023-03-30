@@ -10,6 +10,7 @@
 #include "nrf_log_default_backends.h"
 
 #include "bme280.h"
+#include "ccs811.h"
 #include "twi_helpers.h"
 
 uint8_t tx_data[] = {0xd0};
@@ -36,6 +37,7 @@ int main(void)
 
     twi_init();
     bme280_init();
+    ccs811_init();
 
     while (true)
     {
@@ -45,6 +47,12 @@ int main(void)
         NRF_LOG_INFO("Temp: %d", bme_output.temperature * 100);
         NRF_LOG_INFO("Press: %d", bme_output.pressure * 100);
         NRF_LOG_INFO("Humi: %d", bme_output.humidity * 100);
+
+        ccs811_send_env_data(bme_output.temperature, bme_output.humidity);
+        CCS811_output ccs_output = ccs811_read_data();
+
+        NRF_LOG_INFO("eCO: %d", ccs_output.eCO);
+        NRF_LOG_INFO("eTVOC: %d", ccs_output.eTVOC);
 
         nrf_delay_ms(1000);
         NRF_LOG_FLUSH();
